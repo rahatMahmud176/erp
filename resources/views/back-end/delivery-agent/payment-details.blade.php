@@ -19,7 +19,7 @@
                             <thead>
                             <tr> 
                                 <th>Date</th>
-                                <th>Sell ID</th>
+                                <th>Custoemr-(Sell ID)</th>
                                 <th>Challan No.</th>
                                 <th>Amount</th>
                                 <th>Status</th> 
@@ -37,7 +37,7 @@
                                     $date=date_create($agent->date);
                                     echo date_format($date,"d-M-Y");
                                 ?></td> 
-                                 <td>{{ $agent->sell_id }}</td> 
+                                 <td>{{ $agent->sell->customer.'-'.$agent->sell_id }}</td> 
                                  <td>{{ $agent->challan }}</td> 
                                  <td>{{ $agent->amount }} \-</td> 
                                  <td><span class="badge badge-pill badge-soft-danger font-size-12">{{ $agent->status==0?'Pending':'' }}</span> </td> 

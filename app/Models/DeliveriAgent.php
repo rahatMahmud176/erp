@@ -57,4 +57,7 @@ public static function deleteSell($details)
 }
 
 
+
+
+
 }//Model

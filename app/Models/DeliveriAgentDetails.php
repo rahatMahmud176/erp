@@ -25,6 +25,11 @@ class DeliveriAgentDetails extends Model
 
 
 
+    public function sell()
+    {
+       return $this->belongsTo('App\Models\Sell','sell_id');
+    }
+    
 
 
 
