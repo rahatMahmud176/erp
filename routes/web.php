@@ -259,6 +259,21 @@ Route::get('payment-delete/{id}', [
 
 
 
+Route::resource('account', App\Http\Controllers\AccountController::class);
+Route::get('account/update-account-status/{id}', [
+    'uses' => 'App\Http\Controllers\AccountController@updateAccountStatus',
+    'as' => 'updateAccountStatus',
+]);
+Route::get('account.delete.alart/{id}', [
+    'uses'    => 'App\Http\Controllers\AccountController@accountDeleteAlert',
+    'as'      => 'account.delete.alart'
+]); 
+Route::get('account-delete/{id}', [
+        'uses'    => 'App\Http\Controllers\AccountController@accountDelete',
+        'as'      => 'account-delete'
+]); 
+
+
 
 Route::resource('report', App\Http\Controllers\ReportController::class);
 Route::get('in-stock/report',[

@@ -90,6 +90,18 @@
                         <li><a href="{{ route('deliveriAgent.index') }}">Add Agent</a></li> 
                         <li><a href="{{ route('deliveriAgent.manage-payment') }}">Manage Agent</a></li>  
                     </ul>
+                </li>   
+
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <i class="bx bxs-eraser"></i>
+                        {{-- <span class="badge badge-pill badge-danger float-right">10</span> --}}
+                        <span>Account's</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('account.index') }}">Add Account</a></li> 
+                        <li><a href="{{ route('deliveriAgent.manage-payment') }}">Manage Account</a></li>  
+                    </ul>
                 </li>  
             </ul>
         </div>
