@@ -60,6 +60,12 @@ class AccountController extends Controller
         Alert::success('Success','Account update Succefully');
         return redirect()->back();
     }
+    public function manageAccounts()
+    {
+        return view('back-end.account.manage-account',[
+            'accounts'  => Account::all(),
+        ]);
+    }
 
     /**
      * Display the specified resource.

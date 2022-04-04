@@ -100,7 +100,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('account.index') }}">Add Account</a></li> 
-                        <li><a href="{{ route('deliveriAgent.manage-payment') }}">Manage Account</a></li>  
+                        <li><a href="{{ route('account.manage-payment') }}">Manage Account</a></li>  
                     </ul>
                 </li>  
             </ul>

@@ -272,6 +272,10 @@ Route::get('account-delete/{id}', [
         'uses'    => 'App\Http\Controllers\AccountController@accountDelete',
         'as'      => 'account-delete'
 ]); 
+Route::get('account.manage-payment', [
+    'uses'    => 'App\Http\Controllers\AccountController@manageAccounts',
+    'as'      => 'account.manage-payment'
+]);
 
 
 
