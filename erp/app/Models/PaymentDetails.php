@@ -22,10 +22,26 @@ class PaymentDetails extends Model
         self::$pay->save();
     }
 
- public function supplier()
- {
-    return $this->belongsTo('App\Models\Supplier','supplier_id');
- }
+    public static function savePaymentDetailsFromSellReturn($cashId,$amount,$agentId)
+    {
+        self::$pay = new PaymentDetails();
+        self::$pay->date                 = date('Y-m-d');
+        self::$pay->cash_id              = $cashId;
+        self::$pay->delivery_agent_id    = $agentId;
+        self::$pay->amount               = $amount;
+        self::$pay->description          = "This payment was taken from the delivery agent";
+        self::$pay->save();
+    }
 
+
+  public function supplier()
+  {
+      return $this->belongsTo('App\Models\Supplier','supplier_id');
+  }
+   
+ public function agent()
+ {
+    return $this->belongsTo('App\Models\DeliveriAgent','delivery_agent_id');
+ }
 
 }//Models

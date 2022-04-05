@@ -88,7 +88,7 @@
                   <thead>
                   <tr>
                       <th>Date.</th>
-                      <th>Supplier</th>
+                      <th>Via</th>
                       <th>Amount</th>
                       <th>Description</th> 
                       <th>Action</th> 
@@ -107,11 +107,24 @@
                                 echo date_format($date,"d-M-Y");
                                 ?>     
                             </td>
-                            <td>{{ $payment->supplier->title }}</td>
+                            <td>
+                                @if ($payment->supplier_id)
+                                    {{ $payment->supplier->title }} <span class="text-success">(Supplier)</span>
+                                @elseif ($payment->delivery_agent_id)
+                                     {{ $payment->agent->title }} <span class="text-danger">(D.agent/sell return)</span>
+                                @endif
+                                    
+                                 
+                            </td>
                             <td>{{ $payment->amount }}</td>
                             <td>{{ $payment->description?$payment->description:'-' }}</td>
                             <td>
+                                @if ($payment->delivery_agent_id)
+                                <button disabled class="btn btn-info">NDA</button>
+                              @else
                                 <a href="{{ route('payment.delete.alart',['id'=>$payment->cash_id]) }}"><i class="dripicons-trash text-danger" title="Click for delete"></i></a> 
+                                    
+                                @endif
                             </td>
                         </tr>
                    @endforeach

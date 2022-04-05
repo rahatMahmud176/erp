@@ -12,6 +12,7 @@ use App\Models\Item;
 use App\Models\ItemColor;
 use App\Models\ItemDetails;
 use App\Models\ItemSize;
+use App\Models\PaymentDetails;
 use App\Models\Sell;
 use App\Models\SellDetails;
 use App\Models\Size;
@@ -264,7 +265,13 @@ public function sellDeleteAlert($id)
                CashDetails::where('sell_id',$id)->delete();
         } else {
           $details = DeliveriAgentDetails::where('sell_id',$id)->first(); 
-          DeliveriAgent::deleteSell($details); 
+          if ($details->status==1) {
+            $cashId = Cash::cashPaymentFromSellReturn($details->amount);
+            PaymentDetails::savePaymentDetailsFromSellReturn($cashId,$details->amount,$details->agent_id);
+          }else{
+            DeliveriAgent::deleteSell($details); 
+          }
+          
           DeliveriAgentDetails::where('sell_id',$id)->delete();
         }
         Sell::find($id)->delete(); 
