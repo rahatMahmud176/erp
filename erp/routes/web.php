@@ -276,6 +276,11 @@ Route::get('account.manage-payment', [
     'uses'    => 'App\Http\Controllers\AccountController@manageAccounts',
     'as'      => 'account.manage-payment'
 ]);
+ 
+Route::get('accounts-for-product-buy-page', [
+    'uses'    => 'App\Http\Controllers\AccountController@accountsInfoForProductBuyPage',
+    'as'      => 'accounts-for-product-buy-page'
+]);
 
 
 

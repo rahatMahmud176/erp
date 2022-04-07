@@ -19,7 +19,7 @@ class AccountController extends Controller
             'accounts'  => Account::all(),
         ]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -132,4 +132,20 @@ class AccountController extends Controller
     {
         //
     }
+    public function accountsInfoForProductBuyPage()
+    {
+       return response()->json([
+        'accounts'   => Account::where('status',1)->get(),
+       ]);
+    }
+
+
+
+
+
+
+
+
+
+
 }

@@ -7,7 +7,7 @@
         {{ Form::open(['route'=>'stock.store','method'=>'POST']) }}
         <div class="card col-md-6 mx-auto"> 
             <div class="card-body">
-               <table>
+               <table id="productBasicinfoTable" >
                    <tr>
                        <th>Date:</th>
                        <td><input class="form-control" type="date" name="date" value="{{ date('Y-m-d') }}" id="" required></td>
@@ -26,6 +26,21 @@
                             </select>
                         </td>
                    </tr>
+                   <tr >
+                       <th>Via:</th>
+                       <td>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input productBuyViaPay" type="radio" name="productBuyVia" required id="inlineRadio1" value="1">
+                            <label class="form-check-label" for="inlineRadio1">Pay</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input productBuyViaDue" type="radio" name="productBuyVia" id="inlineRadio2" value="0">
+                            <label class="form-check-label" for="inlineRadio2">Due</label>
+                          </div> 
+                        </td> 
+                   </tr>
+                   <tr>
+                   
                </table>
             </div>
           </div>

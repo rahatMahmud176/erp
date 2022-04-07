@@ -286,6 +286,36 @@ $(document).on('change','.selectSellColor', function(){
           
 });
 
+$(document).on('change','.productBuyViaPay', function(){
+        
+        $.ajax({
+                type: 'GET',
+                url : "{{ url('accounts-for-product-buy-page') }}",
+                data: '',
+                dataType: 'json',
+                success: function(res){
+                        console.log(res);
+                        var tr = '';
+                        var tr = '<tr class="accountTr">';
+                        tr +='<th>Accounts:</th>';
+                        tr += '<td>';
+                        tr +='<select name="account" class="select2 form-control" id="">';
+                        tr +='<option value="0">Cash</option>';   
+                              $.each(res.accounts, function(key,value){
+                                tr +='<option value="'+value.id+'">'+value.title+'</option>';  
+                              })   
+                                
+                        tr +='</select>';
+                        tr +='</td>';
+                        tr +='</tr>';
+                        $('#productBasicinfoTable').append(tr);   
+                }
+        });
 
+       
+});
 
+$(document).on('change','.productBuyViaDue', function(){
+        $('.accountTr').remove();
+});
 </script>
