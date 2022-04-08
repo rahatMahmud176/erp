@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Brand;
+use App\Models\Cash;
+use App\Models\CashDetails;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Item;
 use App\Models\ItemColor;
 use App\Models\ItemDetails;
 use App\Models\ItemSize;
+use App\Models\PaymentDetails;
 use App\Models\Size;
 use App\Models\Stock;
 use App\Models\StockDetails;
 use App\Models\SubCategory;
 use App\Models\Supplier;
+use App\Models\SupplierPayDetails;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -27,6 +32,7 @@ class StockController extends Controller
     public $sizeArray = [];
     public $stockId;
     public $i;
+    public $grandTotal;
     public $stockDetails;
     public $resultArray=[];
     /**
@@ -64,17 +70,36 @@ class StockController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-            $this->i= 0;
+    {   
+         
+            $this->i= 0; 
         //    return $request;
         $this->stockId = Stock::saveStock($request); 
-        $this->resultArray= $this->makeArray($request);
+         $this->resultArray= $this->makeArray($request);
         foreach ($this->resultArray as $result) {
             StockDetails::saveStockDetails($result,$this->stockId);
             ItemDetails::stockSave($result['item_id'],$result['color_id'],$result['size_id'],$result['qty']);
             Item::saveItemStock($result['item_id'],$result['qty']);
+            $this->grandTotal = $this->grandTotal + $result['total']; 
         }
-        Alert::success('Saved', 'Your Data save Successfully');
+         if ($request->productBuyVia==0) {
+              Supplier::supplierDeuViaProductBuy($this->grandTotal,$request->supplier); 
+         } else {
+            if ($request->account==0) {
+              $cashId = Cash::cashPayViaBuy($request->date,$this->grandTotal);
+              PaymentDetails::cashPayViaBuy($cashId,$request->date,$request->supplier,$this->grandTotal); 
+              SupplierPayDetails::PayViaBuy($request->supplier,$this->stockId,$request->date,$this->grandTotal,$request->account);
+              
+            } else {
+              Account::PayViaBuy($request->account,$request->date,$this->grandTotal);
+              SupplierPayDetails::PayViaBuy($request->supplier,$this->stockId,$request->date,$this->grandTotal,$request->account);
+
+             }
+             
+            //Supplier::supplierPayViaProductBuy($this->grandTotal,$request->supplier);
+         }
+         
+        Alert::success('Buy success', 'Proudct buy Successfully');
         return redirect()->back();
 
     }

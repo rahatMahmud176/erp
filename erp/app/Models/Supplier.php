@@ -40,4 +40,18 @@ public static function supplierUpdate($request,$id)
    self::$supplier = Supplier::find($id); 
    self::supplierBasicInfo($request,self::$supplier); 
 }  
+
+public static function supplierDeuViaProductBuy($grandTotal,$supplierId)
+{
+   self::$supplier       = Supplier::find($supplierId);
+   self::$supplier->due  = self::$supplier->due + $grandTotal;
+   self::$supplier->save();
+}
+
+
+
+
+
+
+
 }//Model

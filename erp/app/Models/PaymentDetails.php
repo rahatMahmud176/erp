@@ -32,7 +32,16 @@ class PaymentDetails extends Model
         self::$pay->description          = "This payment was taken from the delivery agent";
         self::$pay->save();
     }
-
+    public static function cashPayViaBuy($cashId,$date,$supplier_id,$grandTotal)
+    {
+        self::$pay = new PaymentDetails();
+        self::$pay->date                 = $date;
+        self::$pay->cash_id              = $cashId;
+        self::$pay->supplier_id          = $supplier_id;
+        self::$pay->amount               = $grandTotal;
+        self::$pay->description          = 'You Pay when product buy';
+        self::$pay->save();
+    }
 
   public function supplier()
   {

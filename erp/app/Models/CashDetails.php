@@ -38,6 +38,11 @@ class CashDetails extends Model
         self::$cash->save();
     }
 
+    
+
+
+
+
     public function agent()
     {
         return $this->belongsTo('App\Models\DeliveriAgent','delivery_agent_id');

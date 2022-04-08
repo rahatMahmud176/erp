@@ -297,7 +297,7 @@ $(document).on('change','.productBuyViaPay', function(){
                         console.log(res);
                         var tr = '';
                         var tr = '<tr class="accountTr">';
-                        tr +='<th>Accounts:</th>';
+                        tr +='<th>Methods:</th>';
                         tr += '<td>';
                         tr +='<select name="account" class="select2 form-control" id="">';
                         tr +='<option value="0">Cash</option>';   

@@ -55,6 +55,13 @@ class Cash extends Model
           return self::$cash->id;
     }
 
-
+    public static function cashPayViaBuy($date,$grandTotal)
+    {
+          self::$cash         = new Cash();
+          self::$cash->date   = $date;
+          self::$cash->due    = $grandTotal;
+          self::$cash->save();
+          return self::$cash->id;
+    }
 
 }
