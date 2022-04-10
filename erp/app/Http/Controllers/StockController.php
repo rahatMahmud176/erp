@@ -85,18 +85,10 @@ class StockController extends Controller
          if ($request->productBuyVia==0) {
               Supplier::supplierDeuViaProductBuy($this->grandTotal,$request->supplier); 
          } else {
-            if ($request->account==0) {
-              $cashId = Cash::cashPayViaBuy($request->date,$this->grandTotal);
-              PaymentDetails::cashPayViaBuy($cashId,$request->date,$request->supplier,$this->grandTotal); 
-              SupplierPayDetails::PayViaBuy($request->supplier,$this->stockId,$request->date,$this->grandTotal,$request->account);
-              
-            } else {
-              Account::PayViaBuy($request->account,$request->date,$this->grandTotal);
-              SupplierPayDetails::PayViaBuy($request->supplier,$this->stockId,$request->date,$this->grandTotal,$request->account);
-
-             }
+            $cashId = Cash::cashPayViaBuy($request->date,$this->grandTotal);
+            PaymentDetails::cashPayViaBuy($cashId,$request->date,$request->supplier,$this->grandTotal); 
+            // SupplierPayDetails::PayViaBuy($request->supplier,$this->stockId,$request->date,$this->grandTotal,$request->account);
              
-            //Supplier::supplierPayViaProductBuy($this->grandTotal,$request->supplier);
          }
          
         Alert::success('Buy success', 'Proudct buy Successfully');

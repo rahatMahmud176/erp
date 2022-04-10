@@ -49,6 +49,14 @@ public static function supplierDeuViaProductBuy($grandTotal,$supplierId)
 }
 
 
+public static function payment($supplierId,$amount)
+{
+   self::$supplier       = Supplier::find($supplierId);
+   self::$supplier->due  = self::$supplier->due - $amount;
+   self::$supplier->save();
+}
+
+
 
 
 

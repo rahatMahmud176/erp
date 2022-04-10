@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
+use App\Models\AccountDetail;
 use App\Models\Cash;
 use App\Models\CashDetails;
 use App\Models\PaymentDetails;
@@ -12,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class CashController extends Controller
 {
     public $cash;
+    public $cashId =0;
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +25,7 @@ class CashController extends Controller
         $lastOneDay = \Carbon\Carbon::today(); 
          return view('back-end.cash.cash-in',[
              'supplier'     => Supplier::where('status',1)->get(),
+             'accounts'     => Account::where('status',1)->get(),
              'cashs'        => CashDetails::where('supplier_id','!=','NULL')
                             ->where('created_at','>=',$lastOneDay)
                             ->get(),
@@ -31,15 +35,22 @@ class CashController extends Controller
     {
          return view('back-end.cash.payment',[
             'supplier'     => Supplier::where('status',1)->get(),
-            'payments'     => PaymentDetails::all(),
+             'accounts'     => Account::where('status',1)->get(),
+             'payments'     => PaymentDetails::all(),
          ]);
     }
 
     public function cashPaymentSave(Request $request)
     {
-         $this->cashInfoValidate($request);
-         $cashId = Cash::cashPayment($request);
-         PaymentDetails::savePaymentDetails($cashId,$request);
+        $this->cashInfoValidate($request);
+        if ($request->account==0) {
+            $this->cashId = Cash::cashPayment($request);
+        } else { 
+            Account::payment($request->account,$request->amount); 
+        } 
+        PaymentDetails::savePaymentDetails($this->cashId,$request);
+
+         Supplier::payment($request->supplier_id,$request->amount);
          Alert::success('Payment Done','Your payment Has been Done.');
          return redirect()->back();
     }
@@ -75,10 +86,16 @@ class CashController extends Controller
     public function store(Request $request)
     {
         $this->cashInfoValidate($request);
-        $cashId = Cash::cashIn($request);
-        CashDetails::saveDetails($cashId,$request);
+        if ($request->account==0) {
+            $cashId = Cash::cashIn($request);
+            CashDetails::saveDetails($cashId,$request);
+        } else {
+            Account::cashIn($request); 
+            AccountDetail::cashInInfoSave($request);
+        }
         Alert::success('Cash in','Cash in successfully');
         return redirect()->back();
+       
     }
 
     /**

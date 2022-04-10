@@ -42,12 +42,25 @@
                      @endforeach
                  </select>
                 </div>
-            </div>     
+            </div>  
+
+            <div class="form-group row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-2 col-form-label">Account:</label>
+                <div class="col-sm-10">
+                 <select name="account" class="form-control select2" id="">
+                     <option value="" selected disabled>--select--</option> 
+                     <option value="0">Hand Cash</option> 
+                     @foreach ($accounts as $account)
+                          <option value="{{ $account->id }}">{{ $account->title }}</option>  
+                     @endforeach
+                 </select>
+                </div>
+            </div>    
               
               <div class="form-group row mb-4">
                       <label for="horizontal-firstname-input" class="col-sm-2 col-form-label">Amount</label>
                       <div class="col-sm-10">
-                        <input type="number" name="amount" class="form-control" id="horizontal-firstname-input">
+                        <input type="number" name="amount" class="form-control"  value="" id="horizontal-firstname-input">
                       </div>
                   </div>
 
@@ -122,7 +135,7 @@
                                 @if ($payment->delivery_agent_id)
                                 <button disabled class="btn btn-info">NDA</button>
                               @else
-                                <a href="{{ route('payment.delete.alart',['id'=>$payment->cash_id]) }}"><i class="dripicons-trash text-danger" title="Click for delete"></i></a> 
+                                {{-- <a href="{{ route('payment.delete.alart',['id'=>$payment->cash_id]) }}"><i class="dripicons-trash text-danger" title="Click for delete"></i></a>  --}}
                                     
                                 @endif
                             </td>

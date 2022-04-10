@@ -16,11 +16,16 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('back-end.supplier.manage',[
+        return view('back-end.supplier.add',[
             'suppliers' => Supplier::orderBy('id','desc')->get()
         ]);
     }
-
+    public function supplierManage()
+    {
+        return view('back-end.supplier.manage',[
+            'suppliers'  => Supplier::where('status',1)->get(),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

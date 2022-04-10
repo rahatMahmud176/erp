@@ -31,7 +31,7 @@
                        <td>
                         <div class="form-check form-check-inline ">
                             <input class="form-check-input productBuyViaPay" type="radio" name="productBuyVia" required id="inlineRadio1" value="1">
-                            <label class="form-check-label" for="inlineRadio1">Pay</label>
+                            <label class="form-check-label" for="inlineRadio1">Cash</label>
                           </div>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input productBuyViaDue" type="radio" name="productBuyVia" id="inlineRadio2" value="0">

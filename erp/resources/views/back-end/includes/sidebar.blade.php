@@ -37,6 +37,7 @@
                     </a> 
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('supplier.index') }}">Add Supplier</a></li>
+                        <li><a href="{{ route('supplier.manage') }}">Manage Supplier</a></li>
                     </ul>
                 </li>
 
@@ -72,11 +73,13 @@
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="bx bxs-eraser"></i>
                         <span class="badge badge-pill badge-success float-right">10</span>
-                        <span>Cash</span>
+                        <span>Account's</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('cash.index') }}">Cash In</a></li> 
                         <li><a href="{{ route('cash.payment') }}">Payment</a></li>  
+                        <li><a href="{{ route('account.index') }}">Add Account</a></li> 
+                        <li><a href="{{ route('deliveriAgent.manage-payment') }}">Manage Account</a></li> 
                     </ul>
                 </li>   
 
@@ -92,17 +95,7 @@
                     </ul>
                 </li>   
 
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <i class="bx bxs-eraser"></i>
-                        {{-- <span class="badge badge-pill badge-danger float-right">10</span> --}}
-                        <span>Account's</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('account.index') }}">Add Account</a></li> 
-                        <li><a href="{{ route('deliveriAgent.manage-payment') }}">Manage Account</a></li>  
-                    </ul>
-                </li>  
+                  
             </ul>
         </div>
         <!-- Sidebar ok-->

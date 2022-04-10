@@ -41,13 +41,18 @@ public static function accountUpdate($request,$id)
    self::$account = Account::find($id); 
    self::accountBasicInfo($request,self::$account); 
 }
-
-public static function PayViaBuy($accountId,$date,$grandTotal)
+public static function cashIn($request)
 {
-   self::$account = Account::find($accountId);
-   self::$account->pay_amount = self::$account->get_amount - $grandTotal;
+   self::$account = Account::find($request->account);
+   self::$account->pay_amount = self::$account->pay_amount + $request->amount;
    self::$account->save();
 }
-
+ 
+public static function payment($accountId,$amount)
+{
+   self::$account = Account::find($accountId);
+   self::$account->pay_amount = self::$account->pay_amount - $amount;
+   self::$account->save();
+}
 
 }//Model

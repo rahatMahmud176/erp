@@ -15,7 +15,11 @@ class PaymentDetails extends Model
     {
         self::$pay = new PaymentDetails();
         self::$pay->date                 = $request->date;
-        self::$pay->cash_id              = $cashId;
+        if ($request->account) {
+            self::$pay->account_id              = $request->account; 
+        } else {
+            self::$pay->cash_id              = $cashId;
+        } 
         self::$pay->supplier_id          = $request->supplier_id;
         self::$pay->amount               = $request->amount;
         self::$pay->description          = $request->description;

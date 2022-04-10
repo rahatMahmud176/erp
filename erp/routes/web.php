@@ -150,6 +150,10 @@ Route::get('supplier.delete.alart/{id}', [
 Route::get('supplier-delete/{id}', [
         'uses'    => 'App\Http\Controllers\SupplierController@supplierDelete',
         'as'      => 'supplier-delete'
+]); 
+Route::get('supplier.manage', [
+        'uses'    => 'App\Http\Controllers\SupplierController@supplierManage',
+        'as'      => 'supplier.manage'
 ]);
 
 
